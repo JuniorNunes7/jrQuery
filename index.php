@@ -48,6 +48,7 @@
 </html>
 
 <script src="js/jrQuery.js"></script>
+<script src="js/socialshare.js"></script>
 <script>
 
     // Classe em javascript
@@ -106,7 +107,7 @@
         // .always(function() {
         //     console.log("complete");
         // });
-        
+
         $.ajax({
             path: 'teste.php?teste=2',
             method: 'GET',
