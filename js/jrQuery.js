@@ -1,7 +1,38 @@
 // Criar objeto do elemento
-function $(selector) {
-    return new ElementObj( (typeof selector == 'object') ? [selector] : document.querySelectorAll(selector) );
+
+$ = function(selector) {
+    if(selector != null)
+        return new ElementObj( (typeof selector == 'object') ? [selector] : document.querySelectorAll(selector) );
+
+    this.ajax = function() {
+        return 'a';
+    }
 }
+
+$.ajax = function(data, callback){
+    var xmlhttp;
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    
+    } else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            if(data.response == 'text'){
+                callback(xmlhttp.responseText);
+            } else if(data.response == 'xml') {
+                callback(xmlhttp.responseXML);    
+            } else {
+                return callback(false);
+            }
+        }
+    }
+
+    xmlhttp.open(data.method, data.path, true);
+    xmlhttp.send();
+};
 
 // Classe elementObj
 function ElementObj(elements) {
@@ -42,7 +73,19 @@ function ElementObj(elements) {
         if(value == null) return this.element.innerHTML;
         
         this.element.innerHTML = value;
-    } 
+    }
+
+    this.append = function(html) {
+        this.checkUniqueElement();
+
+        this.html(this.element.innerHTML + html);
+    }
+
+    this.prepend = function(html) {
+        this.checkUniqueElement();
+
+        this.html(html + this.element.innerHTML);
+    }
 
     this.addClass = function(newClass) {
         this.each(function(i, element) {

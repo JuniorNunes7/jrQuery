@@ -40,12 +40,14 @@
 
             teste2
             <input id="teste12" type="checkbox">
+
+            <div id="response"> <h1>TESTE DE DIV </h1> <hr> </div>
         </div>
     </form>
 </body>
 </html>
 
-<script src="scripts/jrQuery.js"></script>
+<script src="js/jrQuery.js"></script>
 <script>
 
     // Classe em javascript
@@ -88,7 +90,37 @@
     window.onload = function(){
         // handlingForm('form',  'blur');
         // $('span').removeClass('message');
+            
+        // $.ajax({
+        //     url: '/path/to/file',
+        //     type: 'default GET (Other values: POST)',
+        //     dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+        //     data: {param1: 'value1'},
+        // })
+        // .done(function() {
+        //     console.log("success");
+        // })
+        // .fail(function() {
+        //     console.log("error");
+        // })
+        // .always(function() {
+        //     console.log("complete");
+        // });
+        
+        $.ajax({
+            path: 'teste.php?teste=2',
+            method: 'GET',
+            response: 'text',
+            parameters: {teste: 2}
 
+        }, function(response){
+            $('#response').prepend(response);
+        });
+
+        // $('input').ajax('teste.php?teste=2', 'GET', 'text', function(response){
+        //     console.log(response);
+        // });
+        
         // Pegando elemento e chamando a função 'on' definida na classe
         $('input').on('blur', function(){
 
@@ -117,4 +149,4 @@
 
 </script>
 
-<script src="scripts/formValidate.js"></script>
+<script src="js/formValidate.js"></script>
