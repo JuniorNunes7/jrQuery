@@ -1,12 +1,7 @@
 // Criar objeto do elemento
 
 $ = function(selector) {
-    if(selector != null)
-        return new ElementObj( (typeof selector == 'object') ? [selector] : document.querySelectorAll(selector) );
-
-    this.ajax = function() {
-        return 'a';
-    }
+    return new ElementObj( (typeof selector == 'object') ? [selector] : document.querySelectorAll(selector) );
 }
 
 $.ajax = function(data, callback){
@@ -194,10 +189,15 @@ function ElementObj(elements) {
         return this.element.getAttribute(attribute);
     }
 
+    this.is = function(attribute) {
+        return (this.getAttr(attribute) != null);
+    }
+
     this.each = function(callback) {
         for(var i = 0; i < this.elements.length; i++)
             callback(i, this.elements[i]);
     }
+
 
     // Checagens
     this.checkUniqueElement = function() {

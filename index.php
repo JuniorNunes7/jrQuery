@@ -36,13 +36,20 @@
             <input type="text" id="now" value="abc" style="cursor:pointer; text-align: center;">
             
             teste
-            <input id="teste" type="checkbox" disabled>
+            <input id="teste" type="checkbox" disabled checked>
 
             teste2
             <input id="teste12" type="checkbox">
 
             <div id="response"> <h1>TESTE DE DIV </h1> <hr> </div>
         </div>
+
+        <select name="select" id="select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+            <option value="4">7</option>
+        </select>
     </form>
 </body>
 </html>
@@ -90,33 +97,16 @@
     // Carregar a página
     window.onload = function(){
         // handlingForm('form',  'blur');
-        // $('span').removeClass('message');
-            
+
         // $.ajax({
-        //     url: '/path/to/file',
-        //     type: 'default GET (Other values: POST)',
-        //     dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-        //     data: {param1: 'value1'},
-        // })
-        // .done(function() {
-        //     console.log("success");
-        // })
-        // .fail(function() {
-        //     console.log("error");
-        // })
-        // .always(function() {
-        //     console.log("complete");
+        //     path: 'teste.php?teste=2',
+        //     method: 'GET',
+        //     response: 'text',
+        //     parameters: {teste: 2}
+
+        // }, function(response){
+        //     $('#response').prepend(response);
         // });
-
-        $.ajax({
-            path: 'teste.php?teste=2',
-            method: 'GET',
-            response: 'text',
-            parameters: {teste: 2}
-
-        }, function(response){
-            $('#response').prepend(response);
-        });
 
         // $('input').ajax('teste.php?teste=2', 'GET', 'text', function(response){
         //     console.log(response);
