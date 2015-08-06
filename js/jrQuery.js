@@ -4,12 +4,24 @@ $ = function(selector) {
     return new ElementObj( (typeof selector == 'object') ? [selector] : document.querySelectorAll(selector) );
 }
 
+$.fn = ElementObj.prototype;
+
 $.ajax = function(data, callback){
     var xmlhttp;
-    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+    
+    var parameters = '';
+    for (x in data.parameters){
+        if(parameters) parameters += '&';
+
+        parameters += x + '=' + data.parameters[x];
+    }
+
+    var path = data.path + "?" + parameters;
+
+    if (window.XMLHttpRequest) {
         xmlhttp = new XMLHttpRequest();
     
-    } else {// code for IE6, IE5
+    } else {
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
@@ -18,21 +30,26 @@ $.ajax = function(data, callback){
             if(data.response == 'text'){
                 callback(xmlhttp.responseText);
             } else if(data.response == 'xml') {
-                callback(xmlhttp.responseXML);    
+                callback(xmlhttp.responseXML);
+            } else if(data.response == 'json') {
+                callback(xmlhttp.responseJSON);
             } else {
                 return callback(false);
             }
         }
     }
 
-    xmlhttp.open(data.method, data.path, true);
+    xmlhttp.open(data.method, path, true);
     xmlhttp.send();
 };
+
 
 // Classe elementObj
 function ElementObj(elements) {
     this.elements = elements;
     this.element = elements[0];
+
+    // this.fn = ElementObj.prototype;
 
     this.on = function(jEvent, callback) {
         this.each(function(i, element){

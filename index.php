@@ -50,6 +50,9 @@
             <option value="3" selected>3</option>
             <option value="4">7</option>
         </select>
+
+        <input type="text" maxlength="10" onkeypress="return mascaraData(this, event.charCode)">
+        <input type="text" maxlength="11" onkeypress="return isNumber(event.charCode)">
     </form>
 </body>
 </html>
@@ -57,6 +60,39 @@
 <script src="js/jrQuery.js"></script>
 <script src="js/socialshare.js"></script>
 <script>
+
+$.fn.teste = function(){
+    this.each(function(index, el) {
+        console.log(el);       
+    });
+}
+    // Mascara de Data
+        function mascaraData(t, tecla){
+            var data = t.value;
+
+            if(tecla != 0){
+                if(!isNumber(tecla)) {
+                    return false;
+
+                } else if (data.length == 2) {
+                    t.value = data + '/';
+                
+                } else if (data.length == 5) {
+                    t.value = data + '/';
+
+                } else if (data.length > 9) {
+                    return false;
+
+                }
+            }
+
+            return true;
+        }
+
+        function isNumber(tecla) {
+            return ( ( tecla > 47 && tecla < 58 ) || tecla == 0 );
+        }
+    //
 
     // Classe em javascript
     function pessoa(firstname, lastname, age, sex){
@@ -97,30 +133,31 @@
     // Carregar a página
     window.onload = function(){
         // handlingForm('form',  'blur');
+        // $('input').teste();
+        $.ajax({
+            path: 'teste.php',
+            method: 'GET',
+            response: 'text',
+            parameters: {teste: 2,
+                         teste2: 3}
 
-        // $.ajax({
-        //     path: 'teste.php?teste=2',
-        //     method: 'GET',
-        //     response: 'text',
-        //     parameters: {teste: 2}
-
-        // }, function(response){
-        //     $('#response').prepend(response);
-        // });
+        }, function(response){
+            $('#response').prepend(response);
+        });
 
         // $('input').ajax('teste.php?teste=2', 'GET', 'text', function(response){
         //     console.log(response);
         // });
-        
+
         // Pegando elemento e chamando a função 'on' definida na classe
         $('input').on('blur', function(){
 
             console.log($(this).val());
             
             // Usando o this onde pega o elemento do evento
-            $(this).on('click', function(){
-                console.log($(this).hide());
-            });
+            // $(this).on('click', function(){
+            //     console.log($(this).hide());
+            // });
         });
 
         $('#teste2').on('click', function(){
