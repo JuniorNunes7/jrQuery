@@ -221,4 +221,81 @@ function ElementObj(elements) {
         if(this.elements.length != 1) throw "Erro, o objeto possui muitos elementos.";
     }
 }
+
+$.fn.mask = function(mask) {
+    this.each(function(index, el) {
+        $(el).on('click', function(){
+            
+        });
+        $(el).on('keypress', function(event){
+            var tecla = event.charCode;
+
+            var charMask = '';
+            var position = this.value.length;
+            do{
+                charMask += mask.substr(position, 1);
+
+                if(mask.substr(position+1, 1) != ' ') {
+                    if(mask.substr(position, 1) == 'd' || !isNaN(mask.substr(position, 1))){
+                        break;
+                    }
+                    else if(mask.substr(position+1, 1) == 'd' || !isNaN(mask.substr(position+1, 1))){
+                        break;
+                    }
+                    else if(position >= mask.length){
+                        break;                    
+                    }
+                }
+                position++;
+            }while(1);
+
+            if(tecla != 0) {
+                if(charMask == ' '){
+                    this.value += ' ';
+                
+                } else if(this.value.length >= mask.length) {
+                    event.preventDefault();
+
+                } else if(charMask == 'd' && !checkLetter(tecla)) {
+                    event.preventDefault();
+
+                } else if(!isNaN(charMask) && !checkNumber(tecla)) {
+                    event.preventDefault();
+
+                } else if(charMask != 'd' && isNaN(charMask)) {
+                    if(!validNextChar(mask, this.value.length, tecla)){
+                        event.preventDefault();
+                    } else {
+                        this.value += charMask;
+                    }
+                }
+            }
+        });
+    });
+
+    function checkNumber(tecla) {
+        return (tecla > 47 && tecla < 58)
+    }
+
+    function checkLetter(tecla) {
+        return ( (tecla > 96 && tecla < 123) || (tecla > 64 && tecla < 91) );
+    }
+
+    function validNextChar(mask, position, tecla) {
+        do{
+            var nextChar = mask.substr(position, 1);
+
+            if(position >= mask.length)
+                return false;
+
+            else if(nextChar == 'd')
+                return checkLetter(tecla);
+
+            else if(!isNaN(nextChar) && checkNumber(tecla))
+                return checkNumber(tecla);
+            
+            position++;
+        }while(1);
+    }
+}
 //

@@ -134,16 +134,18 @@ $.fn.teste = function(){
     window.onload = function(){
         // handlingForm('form',  'blur');
         // $('input').teste();
-        $.ajax({
-            path: 'teste.php',
-            method: 'GET',
-            response: 'text',
-            parameters: {teste: 2,
-                         teste2: 3}
+        // $.ajax({
+        //     path: 'teste.php',
+        //     method: 'GET',
+        //     response: 'text',
+        //     parameters: {teste: 2,
+        //                  teste2: 3}
 
-        }, function(response){
-            $('#response').prepend(response);
-        });
+        // }, function(response){
+        //     $('#response').prepend(response);
+        // });
+
+        $('input').mask("(00) 0000-0000");
 
         // $('input').ajax('teste.php?teste=2', 'GET', 'text', function(response){
         //     console.log(response);
