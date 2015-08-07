@@ -224,9 +224,9 @@ function ElementObj(elements) {
 
 $.fn.mask = function(mask) {
     this.each(function(index, el) {
-        $(el).on('click', function(){
-            
-        });
+        // $(el).on('click', function(){
+        //     $(this).val('');
+        // });
         $(el).on('keypress', function(event){
             var tecla = event.charCode;
 
