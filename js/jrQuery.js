@@ -44,7 +44,7 @@ $.ajax = function(data, callback){
 };
 
 
-// Classe elementObj
+// Classe ElementObj
 function ElementObj(elements) {
     this.elements = elements;
     this.element = elements[0];
@@ -221,6 +221,7 @@ function ElementObj(elements) {
         if(this.elements.length != 1) throw "Erro, o objeto possui muitos elementos.";
     }
 }
+// Fim da classe ElementObj
 
 $.fn.mask = function(mask) {
     this.each(function(index, el) {
