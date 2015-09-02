@@ -43,6 +43,10 @@ $.ajax = function(data, callback){
     xmlhttp.send();
 };
 
+$.each = function(array, callback) {
+    for(var i = 0; i < array.length; i++)
+        callback(i, array[i]);
+}
 
 // Classe ElementObj
 function ElementObj(elements) {
@@ -223,6 +227,7 @@ function ElementObj(elements) {
 }
 // Fim da classe ElementObj
 
+// fnMask
 $.fn.mask = function(mask) {
     this.each(function(index, el) {
         // $(el).on('click', function(){

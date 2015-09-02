@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<?php 
+    function __autoload($class_name) {
+        require_once 'classes/' . $class_name . '.php';
+    }
+ ?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Teste</title>
 </head>
 
@@ -19,6 +23,17 @@
 </style>
 
 <body>
+
+    <?php 
+        $usuario = new Usuario;
+
+        $usuario->setNome('José');
+        $usuario->setEmail('jose@email.com');
+
+        if($usuario->insert()) {
+            print_r($usuario->findAll());
+        }
+    ?>
     <form action="index.php" id="form">
         <label for="youtube">Link Youtube: </label>
         <input type="text" required data-message="Digite um endereço do youtube !" pattern="^.*(youtube\.com|youtu\.be)/.+$"><span class="message"></span>
