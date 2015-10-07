@@ -24,19 +24,9 @@
 
 <body>
 
-    <?php 
-        $usuario = new Usuario;
-
-        $usuario->setNome('José');
-        $usuario->setEmail('jose@email.com');
-
-        if($usuario->insert()) {
-            print_r($usuario->findAll());
-        }
-    ?>
     <form action="index.php" id="form">
         <label for="youtube">Link Youtube: </label>
-        <input type="text" required data-message="Digite um endereço do youtube !" pattern="^.*(youtube\.com|youtu\.be)/.+$"><span class="message"></span>
+        <input type="text" required data-message="Digite um endereço do youtube !" pattern="^\d{3}\.\d{3}\.\d{3}\-\d{2}"><span class="message"></span>
         <label for="facebook">Link Facebook: </label>
         <input type="text" required data-message="Digite um endereço do facebook !" name="facebook" pattern="^.*facebook\.com/.+$"><span class="message"></span>
         <label for="twitter">Link Twitter: </label>
@@ -93,6 +83,9 @@ window.onfocus = function() {
 
 // Carregar a página
 window.onload = function(){
+        $('button').on('click', function(){
+            shareSocial('google+', 'http://www.google.com', 'abc');
+        });
     // handlingForm('form',  'blur');
     // $('input').teste();
     // $.ajax({
@@ -106,7 +99,7 @@ window.onload = function(){
     //     $('#response').prepend(response);
     // });
 
-    $('input').mask("(##) 0000-0000");
+    // $('input').mask("(##) 0000-0000");
 
     // $('input').ajax('teste.php?teste=2', 'GET', 'text', function(response){
     //     console.log(response);
@@ -115,7 +108,7 @@ window.onload = function(){
     // Pegando elemento e chamando a função 'on' definida na classe
     $('input').on('blur', function(){
 
-        console.log($(this).val());
+        // console.log($(this).val());
         
         // Usando o this onde pega o elemento do evento
         // $(this).on('click', function(){

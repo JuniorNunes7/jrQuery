@@ -1,4 +1,4 @@
-function shareSocial(provider, shareLink) {
+function shareSocial(provider, shareLink, text) {
     
     var link;
     
@@ -7,7 +7,7 @@ function shareSocial(provider, shareLink) {
             link = 'https://www.facebook.com/sharer.php?u=' + shareLink;
             break;
         case 'twitter':
-            link = "https://twitter.com/share?url="+ shareLink + "&text=&hashtags=";
+            link = "https://twitter.com/share?url="+ shareLink + "&text=" + text + "&hashtags=";
             break;
         case 'google+':
             link = "https://plus.google.com/share?url=" + shareLink;
