@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>jrQuery</title>
+
+    <script src="dist/jrQuery.js"></script>
+</head>
+
+<body>
+
+    <div>
+        <h3>Exemplo de máscaras</h3>
+        <label for="cpf">CPF (000.000.000-00)</label>
+        <input type="text" id="cpf">
+    </div>
+
+    <div>
+        <h3>Exemplo de eventos</h3>
+        <div>
+            <label for="keyUpEvent">KeyUP Event</label>
+            <input type="text" id="keyUpEvent">
+            <p id="keyUpValue"></p>
+        </div>
+
+        <div>
+            <label for="clickEvent">Click Event: (<span id="clickValue">OFF</span>) </label>
+            <button id="clickEvent">ON/OFF</button>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+    // Usando o alias do jrQuery
+    $.fn.debug = function(){
+        this.each(function(index, el) {
+            console.log(el);
+        });
+    }
+
+    $(document).ready(function() {
+        // Input MASK
+        $('#cpf').mask("000.000.000-00");
+
+        // Event Examples
+        $('#keyUpEvent').on('keyup', function() {
+            $('#keyUpValue').html(this.value);
+        });
+
+        $('#clickEvent').on('click', function() {
+            var value = $('#clickValue').html() == 'ON' ? 'OFF' : 'ON';
+            $('#clickValue').html(value);
+        });
+    });
+
+</script>

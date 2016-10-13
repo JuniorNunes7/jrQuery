@@ -1,5 +1,3 @@
-// Criar objeto do elemento
-
 $ = function(selector) {
     return new ElementObj( (typeof selector == 'object') ? [selector] : document.querySelectorAll(selector) );
 }
@@ -8,7 +6,7 @@ $.fn = ElementObj.prototype;
 
 $.ajax = function(data, callback){
     var xmlhttp;
-    
+
     var parameters = '';
     for (x in data.parameters){
         if(parameters) parameters += '&';
@@ -20,7 +18,7 @@ $.ajax = function(data, callback){
 
     if (window.XMLHttpRequest) {
         xmlhttp = new XMLHttpRequest();
-    
+
     } else {
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
@@ -53,7 +51,9 @@ function ElementObj(elements) {
     this.elements = elements;
     this.element = elements[0];
 
-    // this.fn = ElementObj.prototype;
+    this.ready = function(callback) {
+        this.element.onload = callback();
+    }
 
     this.on = function(jEvent, callback) {
         this.each(function(i, element){
@@ -63,7 +63,7 @@ function ElementObj(elements) {
 
     this.hide = function() {
         this.each(function(i, element){
-            element.style.visibility = "hidden";   
+            element.style.visibility = "hidden";
         });
     }
 
@@ -75,19 +75,19 @@ function ElementObj(elements) {
 
     this.isHide = function() {
         return (this.element.style.visibility == "hidden");
-    } 
+    }
 
     this.val = function(value) {
         this.checkUniqueElement();
         if(value == null) return this.element.value;
-        
+
         this.element.value = value;
     }
 
     this.html = function(value) {
         this.checkUniqueElement();
         if(value == null) return this.element.innerHTML;
-        
+
         this.element.innerHTML = value;
     }
 
@@ -188,7 +188,7 @@ function ElementObj(elements) {
     this.prop = function(attribute, value) {
         if(typeof(value) == 'boolean' && value == false){
             this.removeProp(attribute);
-        
+
         }else {
             if(typeof(value) == 'boolean') value = attribute;
 
@@ -249,7 +249,7 @@ $.fn.mask = function(mask) {
                         break;
                     }
                     else if(position >= mask.length){
-                        break;                    
+                        break;
                     }
                 }
                 position++;
@@ -258,7 +258,7 @@ $.fn.mask = function(mask) {
             if(tecla != 0) {
                 if(charMask == ' '){
                     this.value += ' ';
-                
+
                 } else if(this.value.length >= mask.length) {
                     event.preventDefault();
 
@@ -299,7 +299,7 @@ $.fn.mask = function(mask) {
 
             else if(!isNaN(nextChar) && checkNumber(tecla))
                 return checkNumber(tecla);
-            
+
             position++;
         }while(1);
     }
