@@ -1,3 +1,3 @@
 # jrQuery
 
-    Esse projeto tem como objetivo o aprendizado pessoal em javascript.
+    Este projeto tem como objetivo o aprendizado pessoal em javascript...
